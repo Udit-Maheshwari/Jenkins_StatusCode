@@ -68,62 +68,59 @@ public class ReadExcelData {
 //	            return result;
 //	    }
 	    
-	    private static String testInputPath = System.getProperty("user.dir") + "//src//test//resources//test-input//";
+	 private static final String testInputPath = System.getProperty("user.dir") + "/src/test/resources/test-input/";
 
-	    public static String getValue(String fileName, String sheetName, String columnName, int rowNumber) {
+	 public static String getValue(String fileName, String sheetName, String columnName, int rowNumber) {
+	     Workbook wb = null;
+	     FileInputStream inputStream = null;
+	     String result = null;
 
-	        Workbook wb = null;
-	        InputStream inputStream = null;
-	        String result = null;
+	     try {
+	         File file = new File(testInputPath + fileName);
+	         if (!file.exists()) {
+	             throw new FileNotFoundException("Excel file not found at: " + file.getAbsolutePath());
+	         }
 
-	        try {
-	            // Try to load from classpath first (for Jenkins or Maven test runs)
-	            inputStream = ExcelUtil.class.getClassLoader().getResourceAsStream("test-input/" + fileName);
+	         inputStream = new FileInputStream(file);
+	         wb = WorkbookFactory.create(inputStream);
 
-	            // If not found in classpath, try absolute path (for local runs)
-	            if (inputStream == null) {
-	                File file = new File(testInputPath + fileName);
-	                if (!file.exists()) {
-	                    throw new FileNotFoundException("Excel file not found at: " + file.getAbsolutePath());
-	                }
-	                inputStream = new FileInputStream(file);
-	            }
+	         Sheet sheet = wb.getSheet(sheetName);
+	         if (sheet == null) {
+	             throw new IllegalArgumentException("Sheet '" + sheetName + "' not found in workbook.");
+	         }
 
-	            wb = WorkbookFactory.create(inputStream);
+	         Row headerRow = sheet.getRow(0);
+	         if (headerRow == null) {
+	             throw new IllegalArgumentException("Header row is missing in sheet: " + sheetName);
+	         }
 
-	            Sheet sheet = wb.getSheet(sheetName);
-	            if (sheet == null) {
-	                throw new IllegalArgumentException("Sheet '" + sheetName + "' not found in workbook.");
-	            }
+	         DataFormatter formatter = new DataFormatter();
+	         int columnMax = headerRow.getLastCellNum();
 
-	            Row headerRow = sheet.getRow(0);
-	            if (headerRow == null) {
-	                throw new IllegalArgumentException("Header row is missing in sheet: " + sheetName);
-	            }
+	         for (int i = 0; i < columnMax; i++) {
+	             String header = formatter.formatCellValue(headerRow.getCell(i));
+	             if (columnName.equalsIgnoreCase(header.trim())) {
+	                 Row dataRow = sheet.getRow(rowNumber);
+	                 if (dataRow != null) {
+	                     result = formatter.formatCellValue(dataRow.getCell(i));
+	                 }
+	                 break;
+	             }
+	         }
 
-	            DataFormatter formatter = new DataFormatter();
-	            int columnMax = headerRow.getLastCellNum();
+	     } catch (Exception e) {
+	         e.printStackTrace();
+	     } finally {
+	         try {
+	             if (wb != null) wb.close();
+	             if (inputStream != null) inputStream.close();
+	         } catch (IOException e) {
+	             e.printStackTrace();
+	         }
+	     }
 
-	            for (int i = 0; i < columnMax; i++) {
-	                String header = formatter.formatCellValue(headerRow.getCell(i));
-	                if (columnName.equalsIgnoreCase(header.trim())) {
-	                    Row dataRow = sheet.getRow(rowNumber);
-	                    if (dataRow != null) {
-	                        result = formatter.formatCellValue(dataRow.getCell(i));
-	                    }
-	                    break;
-	                }
-	            }
-
-	            wb.close();
-	            inputStream.close();
-
-	        } catch (Exception e) {
-	            e.printStackTrace();
-	        }
-
-	        return (result == null || result.trim().isEmpty()) ? null : result.trim();
-	    }
+	     return (result == null || result.trim().isEmpty()) ? null : result.trim();
+	 }
 	    
 	    public static void deleteAllSheetsInExcel(String fileName) throws IOException {
 	        FileInputStream file = new FileInputStream(new File("./test-output/ExcelReports/" + fileName));

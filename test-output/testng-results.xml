@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results ignored="0" total="1" passed="1" failed="0" skipped="0">
+  <reporter-output>
+  </reporter-output>
+  <suite started-at="2025-06-01T13:41:11 IST" name="Default suite" finished-at="2025-06-01T13:41:51 IST" duration-ms="40175">
+    <groups>
+      <group name="page_component">
+        <method signature="GenericTest.testPageComponentsMilo()[pri:0, instance:Test.GenericTest@2a7686a7]" name="testPageComponentsMilo" class="Test.GenericTest"/>
+      </group> <!-- page_component -->
+    </groups>
+    <test started-at="2025-06-01T13:41:11 IST" name="Default test" finished-at="2025-06-01T13:41:51 IST" duration-ms="40175">
+      <class name="Test.GenericTest">
+        <test-method is-config="true" signature="beforeSuiteConfig()[pri:0, instance:Test.GenericTest@2a7686a7]" started-at="2025-06-01T13:41:11 IST" name="beforeSuiteConfig" finished-at="2025-06-01T13:41:11 IST" duration-ms="144" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- beforeSuiteConfig -->
+        <test-method is-config="true" signature="launchbrowser()[pri:0, instance:Test.GenericTest@2a7686a7]" started-at="2025-06-01T13:41:11 IST" name="launchbrowser" finished-at="2025-06-01T13:41:14 IST" duration-ms="3257" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- launchbrowser -->
+        <test-method is-config="true" signature="initializePage()[pri:0, instance:Test.GenericTest@2a7686a7]" started-at="2025-06-01T13:41:14 IST" name="initializePage" finished-at="2025-06-01T13:41:14 IST" duration-ms="1" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- initializePage -->
+        <test-method signature="testPageComponentsMilo()[pri:0, instance:Test.GenericTest@2a7686a7]" started-at="2025-06-01T13:41:14 IST" name="testPageComponentsMilo" finished-at="2025-06-01T13:41:50 IST" duration-ms="36049" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testPageComponentsMilo -->
+        <test-method is-config="true" signature="getResult(org.testng.ITestResult)[pri:0, instance:Test.GenericTest@2a7686a7]" started-at="2025-06-01T13:41:50 IST" name="getResult" finished-at="2025-06-01T13:41:51 IST" duration-ms="476" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=testPageComponentsMilo status=SUCCESS method=GenericTest.testPageComponentsMilo()[pri:0, instance:Test.GenericTest@2a7686a7] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getResult -->
+        <test-method is-config="true" signature="closebrowser()[pri:0, instance:Test.GenericTest@2a7686a7]" started-at="2025-06-01T13:41:51 IST" name="closebrowser" finished-at="2025-06-01T13:41:51 IST" duration-ms="334" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- closebrowser -->
+        <test-method is-config="true" signature="aftersuitConfig()[pri:0, instance:Test.GenericTest@2a7686a7]" started-at="2025-06-01T13:41:53 IST" name="aftersuitConfig" finished-at="2025-06-01T13:41:53 IST" duration-ms="63" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- aftersuitConfig -->
+      </class> <!-- Test.GenericTest -->
+    </test> <!-- Default test -->
+  </suite> <!-- Default suite -->
+</testng-results>
