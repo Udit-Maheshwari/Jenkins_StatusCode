@@ -851,7 +851,7 @@ public class GenericMethods extends BaseTest {
         String value = null;
         try {
             Properties prop = new Properties();
-            prop.load(new FileInputStream(new File(System.getProperty("user.dir") + "//resource//config//" + filename)));
+            prop.load(new FileInputStream(new File(System.getProperty("user.dir") + "//src//test//resources//config//" + filename)));
             value = prop.getProperty(key);
         } catch (FileNotFoundException e) {
             System.out.println("FileNotFoundException" + " " + value);

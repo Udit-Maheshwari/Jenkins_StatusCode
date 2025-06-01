@@ -23,7 +23,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 public class ReadExcelData {
 	
 	 static ExcelUtil reader;
-	    private static String testInputPath = System.getProperty("user.dir") + "/resource//test-input//";
+	    private static String testInputPath = System.getProperty("user.dir") + "//src//test//resources//test-input//";
 
 	    public static String getValue(String fileName, String sheet, String columnName, int rowNumber) {
 
