@@ -344,5 +344,46 @@ public class GenericPage extends BaseTest {
             }
         }
     }
+    
+    /*
+     * This method will close the geo-popup modal
+     * @param driver
+     */
+    @FindBy(xpath="//*[contains(@id,'localeModal') and contains(@class,'is-Open') or contains(@class,'dialog-modal locale-modal')]")
+    private static WebElement geoPopupOpen;
+    public static By miloGeoPopup = By.xpath("//*[contains(@id,'locale-modal') and contains(@class,'dialog-modal locale-modal')]");
+    @FindBy(xpath = "//*[contains(@id,'locale-modal') and contains(@class,'dialog-modal locale-modal')]")
+    private static WebElement geoPopupOpenMilo;
+    @FindBy(xpath="//*[contains(@id,'locale-modal') and contains(@class,'dialog-modal locale-modal') or @id='localeModal']//*[contains(@aria-label,'Close')]")
+    private static WebElement geoPopup;
+    
+    public static boolean isGeoRoutingPopUpPresent() {
+        boolean isPresent = false;
+        try {
+            //WaitLibrary.eWaitUsingConditions(driver, 1, geoPopupOpen, "visible");
+            if (GenericMethods.checkVisibilityOfElement(geoPopupOpen, "Geo Routing Modal")) {
+                isPresent = true;
+            }
+        } catch (NoSuchElementException ex) {
+            logger.error("ERROR: Geo Routing Modal missing on Page");
+        }
+        return isPresent;
+    }
+    
+    public void closeGeoPopUpModal() {
+        PageFactory.initElements(driver, GenericPage.class);
+        if (isGeoRoutingPopUpPresent()) {
+            logger.info("Geo Routing Modal Detected. Closing it.....");
+            GenericMethods.scrollToElement(geoPopupOpen);
+            //GenericLib.clickBttnOrLink(geoPopup, "Geo IP Pop-up");
+            try {
+                GenericMethods.clickUsingJS(geoPopup, "Geo Routing Modal Pop-up");
+            } catch (Exception e) {
+                logger.error("ERROR: Unable to close Geo Routing Modal");
+            }
+            logger.info("SUCCESS: Geo Routing Modalp closed.....");
+        }
+
+    }
 
 }
