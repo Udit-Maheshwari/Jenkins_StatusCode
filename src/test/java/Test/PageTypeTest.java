@@ -56,7 +56,7 @@ public class PageTypeTest extends PageType{
         String url;
         try {
             outputData.put(1, new Object[]{"Source URL", "Country", "Locale", "Current Page Type Is Milo/Dexter"});
-            url = ReadExcelData.getValue(inputFileName, inputSheetName, "URLs", rowNum);
+            url = ReadExcelData.getValueUsingJenkinsExcel(inputSheetName, "URLs", rowNum);
             while (!url.equals("")) {
                 logger.debug("Webpage URL--> " + url);
                 driver.get(url);
@@ -92,7 +92,7 @@ public class PageTypeTest extends PageType{
                     outputData.put(count, new Object[]{url, country, locale, pageType});
                     count++;
                     rowNum++;
-                    url = ReadExcelData.getValue(inputFileName, inputSheetName, "URLs", rowNum);
+                    url = ReadExcelData.getValueUsingJenkinsExcel(inputSheetName, "URLs", rowNum);
                 }
             }
         } catch (Exception e) {
